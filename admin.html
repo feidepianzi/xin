@@ -140,16 +140,12 @@
         async function saveArray() {
             var input = document.getElementById("arrayInput").value;
             var msgEl = document.getElementById("updateMsg");
-            await loadData();
             var existing = currentZone === 1 ? (dataObj.backend1 || []) : (dataObj.backend2 || []);
             if (!input.trim()) {
-                if (existing.length === 0) {
-                    if (currentZone === 1) { dataObj.backend1 = []; } else { dataObj.backend2 = []; }
-                    await saveDataToStorage();
-                    msgEl.textContent = "已保存（空数组）"; msgEl.style.color = "green";
-                    setTimeout(hideUpdateModal, 1500); return;
-                }
-                msgEl.textContent = "没有新数据！"; msgEl.style.color = "red"; return;
+                if (currentZone === 1) { dataObj.backend1 = []; } else { dataObj.backend2 = []; }
+                await saveDataToStorage();
+                msgEl.textContent = "已保存（空数组）"; msgEl.style.color = "green";
+                setTimeout(hideUpdateModal, 1500); return;
             }
             var existingSet = {};
             for (var e = 0; e < existing.length; e++) existingSet[existing[e]] = true;
