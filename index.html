@@ -98,9 +98,9 @@ function checkNumber() {
             else if (!matchNumberOnly) { matchNumberOnly = item; }
         }
     }
-    if (matchWithSuffix) { r.className="result found"; r.textContent="OO"; }
-    else if (matchNumberOnly) { r.className="result found"; r.textContent="O"; }
-    else { r.className="result not-found"; r.textContent="X"; }
+    if (matchWithSuffix) { r.className="result found"; r.textContent="💯"; }
+    else if (matchNumberOnly) { r.className="result found"; r.textContent="👌"; }
+    else { r.className="result not-found"; r.textContent="😭"; }
 }
 
 document.getElementById("numberInput").addEventListener("input", function(){clearTimeout(debounceTimer); debounceTimer=setTimeout(checkNumber,500);});
