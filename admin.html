@@ -99,12 +99,13 @@
         }
 
         function hideUpdateModal() { document.getElementById("updateModal").style.display = "none"; }
-        function clearCurrentArray() {
+        async function clearCurrentArray() {
             if (!confirm("确定要清除当前数组吗？")) return;
             document.getElementById("arrayInput").value = "";
             if (currentZone === 1) { dataObj.backend1 = []; } else { dataObj.backend2 = []; }
-            document.getElementById("updateMsg").textContent = "已清除，记得保存生效";
-            document.getElementById("updateMsg").style.color = "#666";
+            await saveDataToStorage();
+            document.getElementById("updateMsg").textContent = "已清除！";
+            document.getElementById("updateMsg").style.color = "green";
         }
 
         function parseInput(input) {
