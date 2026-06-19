@@ -167,9 +167,9 @@ document.getElementById("inputBackend1").addEventListener("input",updateCounts);
 document.getElementById("inputBackend2").addEventListener("input",updateCounts);
 
 function hideUpdateModal(){document.getElementById("updateModal").style.display="none";}
-function clearFrontend(){if(confirm("确定要清除主数组吗？")){document.getElementById("inputFrontend").value="";dataObj.frontend=[];updateCounts();}}
-function clearBackend1(){if(confirm("确定要清除 backend1 吗？")){document.getElementById("inputBackend1").value="";dataObj.backend1=[];updateCounts();}}
-function clearBackend2(){if(confirm("确定要清除 backend2 吗？")){document.getElementById("inputBackend2").value="";dataObj.backend2=[];updateCounts();}}
+async function clearFrontend(){if(confirm("确定要清除主数组吗？")){document.getElementById("inputFrontend").value="";dataObj.frontend=[];updateCounts();await saveAllArraysToStorage();}}
+async function clearBackend1(){if(confirm("确定要清除 backend1 吗？")){document.getElementById("inputBackend1").value="";dataObj.backend1=[];updateCounts();await saveAllArraysToStorage();}}
+async function clearBackend2(){if(confirm("确定要清除 backend2 吗？")){document.getElementById("inputBackend2").value="";dataObj.backend2=[];updateCounts();await saveAllArraysToStorage();}}
 
 async function saveAllArrays(){
     var msgEl=document.getElementById("updateMsg");
@@ -195,7 +195,7 @@ async function saveAllArrays(){
     var newB1=getNewItems("inputBackend1",b1Set);
     var newB2=getNewItems("inputBackend2",b2Set);
     var total=newFe.length+newB1.length+newB2.length;
-    if(total===0){msgEl.textContent="没有新数据！";msgEl.style.color="red";return;}
+    if(total===0){/* 清除操作已改变dataObj，仍需保存 */}
     var fe=existingFe.slice();
     for(var a=0;a<newFe.length;a++){if(fe.indexOf(newFe[a])<0)fe.push(newFe[a]);}
     var b1=existingB1.slice();
