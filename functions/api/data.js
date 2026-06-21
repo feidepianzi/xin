@@ -1,6 +1,6 @@
 export async function onRequestGet({env}){
   try{
-    var v = await env.MY_KV.get("search_app_data_v2"), d;
+    var v = await env.MM_KV.get("search_app_data_v3"), d;
     if(!v) d = {frontend:[], backend1:[], backend2:[]};
     else{
       try{ d = JSON.parse(v); }catch(e){ d = {frontend:[], backend1:[], backend2:[]}; }
@@ -23,7 +23,7 @@ export async function onRequestPost({request, env}){
     if(!Array.isArray(d.frontend)) d.frontend = [];
     if(!Array.isArray(d.backend1)) d.backend1 = [];
     if(!Array.isArray(d.backend2)) d.backend2 = [];
-    await env.MY_KV.put("search_app_data_v2", JSON.stringify(d));
+    await env.MM_KV.put("search_app_data_v3", JSON.stringify(d));
     return new Response("OK",{status:200});
   }catch(e){
     return new Response("ERROR:"+e.toString(),{status:500});
